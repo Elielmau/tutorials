@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+    <ul class=chores>
+        {% for chore in chores %}
+            <li><h2>{{ chore.title }}</h2>
+        {% else %}
+            <li><em>Muy bien! No hay tareas pendientes.</em>
+        {% endfor %}
+    </ul>
+{% endblock %}

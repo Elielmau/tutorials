@@ -1,0 +1,8 @@
+MANIFEST.in
+chores/__init__.py
+chores/chores.py
+chores.egg-info/PKG-INFO
+chores.egg-info/SOURCES.txt
+chores.egg-info/dependency_links.txt
+chores.egg-info/requires.txt
+chores.egg-info/top_level.txt
