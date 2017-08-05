@@ -1,1 +1,4 @@
-body    {font-family: sans-serif; background: #eee; }
+body                    { font-family: sans-serif; background: #eee; }
+.active-user-none       { background: #000; }
+.active-user-gael       { background: #f00; }
+.active-user-evie       { background: #ff0; }
