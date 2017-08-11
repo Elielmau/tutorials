@@ -1,0 +1,18 @@
+<!doctype html>
+<title>Tareas del dia</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class=user>
+    {% if session['active_user'] %}
+        <p class="active-user-{{ session['active_user'] }}">Usuario activo:  {{ session['active_user']|capitalize}}</p>
+    {% else %} 
+        <p class="active-user-none">Usuario activo: Ninguno</p>
+    {% endif %}
+    {% block login %}{% endblock %}
+</div>
+<div class=page>
+    <h1>Tareas del dia</h1>
+    {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+</div>

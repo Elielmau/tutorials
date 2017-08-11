@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if session['active_user'] == 'admin' %}
+        <form action="{{ url_for('add_chore') }}" method="post">
+            <dl>
+                <dt>Nueva tarea: 
+                <dd><input type="text" name="chore">
+                <dt>Evie
+                <dd><input type="radio" name="owner" value="evie">
+                <dt>Gael
+                <dd><input type="radio" name="owner" value="gael">
+                <dd><input type="submit" value="+">
+            </dl>
+        </form>
+        <ul class=admin-panel>
+            <li><h3><a href="">Ver Historial</a></h3>
+        </ul>
+    {% endif %}
+    <ul class=chores>
+        {% for chore in chores %}
+            <li><h2>{{ chore.title }}</h2>
+            <form action="{{ url_for('complete_chore') }}" method="post">
+                <dd><input type="hidden" name="id" value="{{ chore.id }}">
+                <dd><input type="submit" value="Completar">
+            </form>
+            {% if session['active_user'] == 'admin' %}
+                <form action="{{ url_for('delete_chore') }}" method="post">
+                    <dd><input type="hidden" name="id" value="{{ chore.id }}">
+                    <dd><input type="submit" value="Eliminar">
+                </form>
+            {% endif %}
+        {% else %}
+            <li><em>Muy bien! No hay tareas pendientes.</em>
+        {% endfor %}
+    </ul>
+{% endblock %}
