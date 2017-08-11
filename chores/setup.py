@@ -4,5 +4,5 @@ setup(
     name='chores',
     packages=['chores'],
     include_package_data=True,
-    install_requires=['flask', 'flask-sqlalchemy']
+    install_requires=['flask', 'flask-sqlalchemy', 'flask-wtf']
 )
