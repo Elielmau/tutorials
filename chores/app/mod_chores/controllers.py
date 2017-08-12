@@ -9,8 +9,7 @@ mod_chores = Blueprint('chores', __name__, url_prefix='/chores')
 @mod_chores.route('/')
 def show_chores():
 
-    # if session['active_user'] == 'admin':
-    if True:
+    if session['active_user'] == 'admin':
         chores = Chore.query.filter(Chore.status == 1).order_by(Chore.id.desc())
     else:
         chores = Chore.query.filter(Chore.owner == session['active_user'], Chore.status == 1).order_by(Chore.id.desc())
