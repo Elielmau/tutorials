@@ -1,4 +1,5 @@
 {% extends "mod_chores/layout.html" %}
+
 {% block body %}
     {% if session['active_user'] == 'admin' %}
         <form action="{{ url_for('add_chore') }}" method="post">

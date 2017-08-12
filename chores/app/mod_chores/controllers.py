@@ -9,11 +9,12 @@ mod_chores = Blueprint('chores', __name__, url_prefix='/chores')
 @mod_chores.route('/')
 def show_chores():
 
+    form = LoginForm(request.form)
     if session['active_user'] == 'admin':
         chores = Chore.query.filter(Chore.status == 1).order_by(Chore.id.desc())
     else:
         chores = Chore.query.filter(Chore.owner == session['active_user'], Chore.status == 1).order_by(Chore.id.desc())
-    return render_template('mod_chores/show_chores.html', usernames=current_app.config['USERS'], chores=chores)
+    return render_template('mod_chores/show_chores.html', usernames=current_app.config['USERS'], chores=chores, form=form)
 
 @mod_chores.route('/add', methods=['POST'])
 def add_chore():
@@ -45,10 +46,8 @@ def delete_chore():
 def login():
     
     form = LoginForm(request.form)
-    if form.validate_on_submit():
-        if form.user.data not in current_app.config['USERS']:
-            session['active_user'] = form.user.data
-            flash('Usuario actualizado')
-            return redirect(url_for('chores.home'))
-        error = 'Usuario no encontrado'
-    return render_template('mod_chores/login.html', form=form)
+    if form.user.data in current_app.config['USERS']:
+        session['active_user'] = form.user.data
+        flash('Usuario actualizado')
+        return redirect(url_for('chores.show_chores'))
+    return render_template('mod_chores/partials/login.html', form=form)
