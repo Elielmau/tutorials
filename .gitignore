@@ -1,4 +1,4 @@
 chores/venv/*
 flaskr/venv/*
-*.pyc
-*.db
+**/*.pyc
+**/*.db
