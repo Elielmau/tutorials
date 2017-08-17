@@ -2,16 +2,12 @@
 
 {% block body %}
     {% if session['active_user'] == 'admin' %}
-        <form action="{{ url_for('add_chore') }}" method="post">
-            <dl>
-                <dt>Nueva tarea: 
-                <dd><input type="text" name="chore">
-                <dt>Evie
-                <dd><input type="radio" name="owner" value="evie">
-                <dt>Gael
-                <dd><input type="radio" name="owner" value="gael">
-                <dd><input type="submit" value="+">
-            </dl>
+        <form action="{{ url_for('chores.add_chore') }}" method="post">
+            {{ chore_form.csrf_token }}
+            {{ chore_form.title.label }}
+            {{ chore_form.title(autocomplete="off") }}
+            {{ chore_form.owner() }}
+            <input type="submit" value="Agregar">
         </form>
         <ul class=admin-panel>
             <li><h3><a href="">Ver Historial</a></h3>
@@ -19,13 +15,13 @@
     {% endif %}
     <ul class=chores>
         {% for chore in chores %}
-            <li><h2>{{ chore.title }}</h2>
-            <form action="{{ url_for('complete_chore') }}" method="post">
+            <li><h2>{{ chore.title }} - {{ chore.owner|capitalize }}</h2>
+            <form action="{{ url_for('chores.complete_chore') }}" method="post">
                 <dd><input type="hidden" name="id" value="{{ chore.id }}">
                 <dd><input type="submit" value="Completar">
             </form>
             {% if session['active_user'] == 'admin' %}
-                <form action="{{ url_for('delete_chore') }}" method="post">
+                <form action="{{ url_for('chores.delete_chore') }}" method="post">
                     <dd><input type="hidden" name="id" value="{{ chore.id }}">
                     <dd><input type="submit" value="Eliminar">
                 </form>

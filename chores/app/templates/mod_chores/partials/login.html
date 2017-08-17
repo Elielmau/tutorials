@@ -1,5 +1,5 @@
-<form method="POST" action="">
-    {{ form.csrf_token }}
-    {{ form.user() }}
+<form action="{{ url_for('chores.login') }}" method="post" >
+    {{ login_form.csrf_token }}
+    {{ login_form.user() }}
      <input type="submit" value="Seleccionar">
 </form>
